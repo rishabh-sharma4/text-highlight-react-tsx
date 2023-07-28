@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from "react";
+import Searchbar from "./components/Searchbar";
+import ResultData from "./components/ResultData";
+export const AppContext: any = createContext(null);
 
-function App() {
+export default function App() {
+  const [searchVal, setSearchVal] = useState("");
+  const [highlightText, setHighlightText] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{ searchVal, setSearchVal, setHighlightText }}>
+      <Searchbar />
+      <ResultData highlightText={highlightText} />
+    </AppContext.Provider>
   );
 }
-
-export default App;
